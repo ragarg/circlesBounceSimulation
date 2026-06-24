@@ -63,7 +63,8 @@ export default class Scene {
         this.circles.push(circle);
         if (this.gl) {
             const shader = this.circles[0].geometryRenderer?.shader;
-            circle.createGeometryRenderer(this.gl, shader);
+            const geometry = this.circles[0].geometryRenderer?.geometry;
+            circle.createGeometryRenderer(this.gl, shader, geometry);
         }
     }
 

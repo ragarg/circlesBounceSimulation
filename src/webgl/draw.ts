@@ -6,6 +6,7 @@ export function draw(gl: WebGL2RenderingContext,  rect : Rectangle, circles : Ar
     gl.clearColor(0.1, 0.1, 0.2, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
+    // Draw rectangle
     if (!rect.geometryRenderer || !rect.geometryRenderer.shader.program)
         return;
     gl.useProgram(rect.geometryRenderer.shader.program);
@@ -14,6 +15,7 @@ export function draw(gl: WebGL2RenderingContext,  rect : Rectangle, circles : Ar
     gl.bindVertexArray(rect.geometryRenderer.vao);
     gl.drawElements(gl.TRIANGLES, rect.geometryRenderer.indexCount, gl.UNSIGNED_SHORT, 0)
 
+    // Draw circles
     if (circles.length != 0) {
         if (!circles[0].geometryRenderer || !circles[0].geometryRenderer.shader.program)
                 return;

@@ -1,4 +1,4 @@
-import { circleGeometry, squareGeometry } from "./geometry";
+import { circleGeometry, squareGeometry, type Geometry } from "./geometry";
 import { circleUniformsConnect, GeometryRenderer, rectangleUniformsConnect } from "./webgl/geometryRenderer";
 import { createCircleShader, createRectangleShader, Shader } from "./webgl/shader";
 
@@ -15,13 +15,16 @@ export class Circle {
         this.position = position;
     }
 
-    createGeometryRenderer(gl: WebGL2RenderingContext, shader: Shader | null = null) {
+    createGeometryRenderer(gl: WebGL2RenderingContext, shader: Shader | null = null, geometry: Geometry | null = null) {
         if (!shader) {
             shader = createCircleShader(gl);
             shader.init();
         }
-        const geometry = circleGeometry();
 
+        if (!geometry) {
+            geometry = circleGeometry();
+        }
+        
         this.geometryRenderer = new GeometryRenderer(gl, geometry, shader);
         this.geometryRenderer.init();
         circleUniformsConnect(this.geometryRenderer)
